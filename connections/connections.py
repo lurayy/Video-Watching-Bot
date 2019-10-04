@@ -1,5 +1,6 @@
 import requests 
 import json
+import random 
 
 class Connection: 
 
@@ -23,10 +24,11 @@ class Connection:
         response_json = json.loads(r.text)
         return response_json['done']
 
-
-# if __name__ == '__main__':
-#     con = Connection()
-#     accounts = con.get_accounts()
-#     print(accounts)
-#     print(con.post_mission_status(accounts['username'][1],True))
-
+    def get_urls(self, region):
+        watch_url = self.vods_urls[random.randint(0,len(self.vods_urls))]
+        login_url = self.login_urls[str(region).upper()]
+        response = {
+            'watch_url':watch_url,
+            'login_url':login_url
+        }
+        return response

@@ -1,16 +1,21 @@
 from webbot import Browser
 import threading
 import time
-from .connections.connections.py import Connection
+from connections.connections import Connection
+import json
+
+REGION = "EUW"
+
+
 class Bot(threading.Thread):
     
-    def setup(self,username,password,login_url,watch_url):
+    def setup(self,username,password,urls, conn):
         self.username = username
         self.password = password
-        self.login_url = login_url
-        #going to change url later
-        self.watch_url = watch_url
-        
+        self.login_url = urls['login_url']
+        self.conn = conn
+        self.watch_url = urls['watch_url']
+
     def run(self):
         bot = Browser(showWindow = True)
         bot.go_to(self.login_url)
@@ -33,12 +38,34 @@ class Bot(threading.Thread):
         time.sleep(5)
         print("signed in")
         bot.go_to(self.watch_url)
-        time.sleep(5)
+        time.sleep(10)
+        self.mission_confirmation(bot)
         bot.quit()
 
+    def mission_confirmation(self,bot):
+        bot.go_to('https://raptor.rewards.lolesports.com/v1/missions/free?locale=en_US')
+        pre = bot.driver.find_element_by_tag_name("pre").text
+        data = json.loads(pre)
+        try:
+            if( data['completed'][0]['isComplete']):
+                self.conn.post_mission_status(self.username, True)
+        except:
+            self.conn.post_mission_status(self.username, False)
+# class ShowProgress(threading.Thread):
+
+
 if __name__ == "__main__":
-    bot1 = Bot()
-    bot1.setup("Eimavekisha","9VnO9XB6dkmBtoE3") 
-    bot1.start()   
+    conn = Connection()
+    bots = []
+    accounts = conn.get_accounts(1)
+    for n in range(len(accounts['username'])):
+        urls = conn.get_urls(REGION)
+        print(accounts['username'][n],  accounts['password'][n], urls, conn)
+        bot = Bot()
+        bot.setup(accounts['username'][n],  accounts['password'][n], urls, conn)
+        bot.start()
+        bots.append(bot)
+        
+
 
 
