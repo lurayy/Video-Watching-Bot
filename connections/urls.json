@@ -1,0 +1,21 @@
+{
+    "vods_urls" : [
+        "https://watch.lolesports.com/vod/102844224136313976/1/at23CJWj7uk",
+        "https://watch.lolesports.com/vod/102844212421489858/1/xhy6mB6NGCU",
+        "https://watch.lolesports.com/vod/102844224136641657/1/jEzi1Jkpk7I",
+        "https://watch.lolesports.com/vod/102844212421620931/1/nKm_NoXxLno",
+        "https://watch.lolesports.com/vod/102844224134872180/1/4LUe9Z7WX7g",
+        "https://watch.lolesports.com/vod/102844212421752004/1/7vYFCHYZ7EY",
+        "https://watch.lolesports.com/vod/102844212420310203/1/J5R7PrKMBv8",
+        "https://watch.lolesports.com/vod/102844212419327157/1/WGYiWA80HgY",
+        "https://watch.lolesports.com/vod/102844212420703421/1/KbwM-YEvg-Q",
+        "https://watch.lolesports.com/vod/102844212420506812/1/ktMWeRtJ8Ko",
+        "https://watch.lolesports.com/vod/102844212420179130/1/sueizrPJcKs"
+    ],
+
+    "login_urls" : {
+        "EUW":"https://euw.leagueoflegends.com/en/",
+        "EUNE": "https://eune.leagueoflegends.com/en/"
+    }
+    
+}

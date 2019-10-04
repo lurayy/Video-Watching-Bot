@@ -1,16 +1,16 @@
 from webbot import Browser
 import threading
 import time
-
+from .connections.connections.py import Connection
 class Bot(threading.Thread):
     
-    def setup(self,username,password):
+    def setup(self,username,password,login_url,watch_url):
         self.username = username
         self.password = password
-        self.login_url = "https://euw.leagueoflegends.com/en/"
+        self.login_url = login_url
         #going to change url later
-        self.watch_url = "https://watch.lolesports.com/vods/worlds/world_championship_2019"
-
+        self.watch_url = watch_url
+        
     def run(self):
         bot = Browser(showWindow = True)
         bot.go_to(self.login_url)
